@@ -73,10 +73,11 @@ include "dbconnect.php";
             }
             echo "</div>";
             }
-            echo "<script>
-                    var metaArray2 = JSON.parse('". json_encode($metaArray2) . "');
-                    console.log(metaArray2);
-</script>";
+            if($metaArray2){
+                    echo "<script>
+                            var metaArray2 = JSON.parse('". json_encode($metaArray2) . "');
+                            console.log(metaArray2);</script>";
+            }
         }
         ?>
             
@@ -150,6 +151,7 @@ include "dbconnect.php";
         
         var data = new Array();
         function getData(){
+        
             getString();
             
             alert(JSON.stringify(data));
@@ -167,6 +169,7 @@ include "dbconnect.php";
             //alert(data);
         }
         function getString(){
+            data = new Array();
             var count = 0;
                         
             $('.select').each(function(){

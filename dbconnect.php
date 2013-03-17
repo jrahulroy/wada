@@ -29,7 +29,7 @@ function generateMeta($conn, $databaseName){
     //Meta Array[0-PRI OR EXT, 1- tableName,2 - columnName, 3 - refTableName,4-refColumnName];
     //$metaArray = array();
     $metaSet = mysql_query($query, $conn);
-    
+    $metaArray2 = array();
     $count=0;
     //$metaArray2 = array();
     for($i=0;$i<mysql_num_rows($metaSet);$i++){
@@ -80,5 +80,59 @@ function generateMeta($conn, $databaseName){
     */
     return $metaArray2;
     
+}
+
+function generateQuery($queryString){
+    $query_array = json_decode($queryString);
+
+
+    //var_dump($query_array);
+
+    //$tables = 
+    //var_dump(array_unique($query_array));
+    $count = 0;
+    $tables = array();
+    $columns = array();
+    $tables[0] = "Hi";
+    //var_dump($tables);
+    for($i=0;$i < count($query_array) ;$i++){
+        if($i==0){
+            $tables[$count] = $query_array[$i][0];
+            $count++;
+
+        }
+        else if($query_array[$i][0] != $query_array[$i-1][0]){
+            $tables[$count] = $query_array[$i][0];
+            $count++;
+        }
+        $columns[$i] = $query_array[$i][0]. '.' .$query_array[$i][1];
+    };
+
+
+    //echo implode(",", $tables);
+    //echo implode(",", $columns);
+    //var_dump($columns);
+
+    $finalQuery = 'SELECT ' . implode(",", $columns) . ' FROM ' . implode(",", $tables);
+    
+    return $finalQuery;
+
+}
+function getQueryString($queryId, $conn){
+    
+    $query = "SELECT query_string from QUERIES WHERE queryid = '" . $queryId . "'";
+
+    //echo $query;
+
+    $resultSet = mysql_query($query, $conn);
+    //var_dump($resultSet);
+    echo mysql_error();
+    $queryResult = mysql_fetch_array($resultSet);
+echo mysql_error();
+
+
+    $queryString =  $queryResult[0];
+    return $queryString;
+
 }
 ?>

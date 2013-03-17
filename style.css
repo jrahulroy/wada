@@ -21,12 +21,12 @@ header img{
     margin:20px 0;
     height:500px;
     background-color:red;
-    border-radius: 20px;
+    /*border-radius: 20px;*/
     background-color:white;
 }
 section.left{
     cursor:pointer;
-    border-radius: inherit;
+    /*border-radius: inherit;*/
     width:30%;
     /*min-width:200px;*/
     float:left;
