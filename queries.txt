@@ -1,3 +1,0 @@
-SHOW TABLES FROM $dbname
-
-SHOW COLUMNS FROM sometable"
