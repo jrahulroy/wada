@@ -17,14 +17,15 @@ $queryId = isset($_GET['queryid'])?$_GET['queryid']:1;
 //echo $queryId;
 
 
-$conn = setconnection('localhost', 'root', '', 'sakila', true);
-if(!$conn){
-    die('Connection  Creation Failed');
-}
+
 
 
 //$conn2 = setconnection('localhost', 'root', '', 'ui-data');
 $storedQuery = getQueryString($queryId, $conn2);
+$conn = setconnection('localhost', 'root', '', $storedQuery['database'], true);
+if(!$conn){
+    die('Connection  Creation Failed');
+}
 $metaArray2 = generateMeta($conn, $storedQuery['database']);
 $query = generateQuery($storedQuery['query'], $metaArray2);
 //echo $query;
