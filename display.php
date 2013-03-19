@@ -21,13 +21,14 @@ $queryId = isset($_GET['query_id'])?$_GET['query_id']:1;
 
 $queryString = getQueryString($queryId, $conn);
 //echo $query_string . '<br />';
-
-$finalQuery = generateQuery($queryString);
+$conn2=setconnection($_SESSION["servername"],$_SESSION["uname"],$_SESSION["pwd"],$_SESSION["database"]);
+$metaArray2 = generateMeta($conn, $_SESSION["database"]);
+$finalQuery = generateQuery($queryString, $metaArray2);
 
 echo '<br/>' . $finalQuery;
 //var_dump($tables);
 
-$conn2=setconnection($_SESSION["servername"],$_SESSION["uname"],$_SESSION["pwd"],$_SESSION["database"]);
+
 if(!$conn2){
     die('Database Connectioin failed');
 }

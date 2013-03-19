@@ -41,7 +41,7 @@ include "dbconnect.php";
             while($row=mysql_fetch_array($res))
             {
                     //echo '<pre>' . var_dump($row) . '</pre>';
-                    echo "<div class='table'><div class='tablename'><a><span class='opr'>+</span><span class='name'> " . $row[0] . "</span></a></div>";
+                    echo "<div class='table'><div class='tablename'><a><span class='opr'>+</span><span class='name'>" . $row[0] . "</span></a></div>";
 
                     $queryc="show columns from " . $row[0] . "";
 
@@ -182,10 +182,13 @@ include "dbconnect.php";
                 data[count][1] = $columnName;
                 count++;
                 //data.$tableName[data.$tableName.length] = $columnName;
+                console.log(':' + $tableName + ':')
             });
         }
+        var val;
         function reflectState(){
             getString();
+            console.log('data :' + data);
             $('.table').addClass('red');
             $('.table').removeClass('green');
             if(data == ''){
@@ -194,9 +197,52 @@ include "dbconnect.php";
                 
             }
             else{
-                var table = new Array();
+                var tables = new Array();
+                
+                for(i=0;i<data.length;i++){
+                    val = '' + data[i][0] + '.' + data[i][1] + '';
+                    //console.log(metaArray2);
+                    //console.log(i + ':' + data[i][0] + '.' + data[i][1] + ':' + metaArray2[val]);
+                    if(metaArray2[val]){
+                        //alert(i);
+                        tables = $.merge(tables, references(data[i][0] + '.' + data[i][1]))
+                        console.log( 'References: ' + references(data[i][0] + '.' + data[i][1]));
+                        console.log('After Merge: ' + tables);
+                    }
+                }
+                $('.table').each(function(){
+                    
+                   var name = $(this).find('.name').html();
+                   //alert(name);
+                   if($.inArray(name,tables) > -1){
+                       $(this).removeClass('red');
+                       $(this).addClass('green');
+                   }
+                });
+                
             }
-            alert(data);
+            //alert(data);
+        }
+        function references(string){
+            var tables = new Array();
+            $.each(metaArray2, function(index, value){
+                if(string == value){
+                    //Foreign Key References
+                    arr = index.split('.');
+                    tables.push(arr[0]);
+                } else if(string == index){
+                    //Primary Key References
+                    arr = string.split('.');
+                    tables.push(arr[0]);
+                    
+                    if(value != 'PRI'){
+                        arr = value.split('.');
+                        tables.push(arr[0]);
+                    }
+                }
+                
+            });
+            return tables;
         }
         reflectState();
     </script>

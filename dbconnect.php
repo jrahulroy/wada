@@ -1,7 +1,7 @@
 <?php
-function setconnection($servername,$username,$password,$database)
+function setconnection($servername,$username,$password,$database, $flag = false)
 {
-        $conn=mysql_connect($servername,$username,$password);
+        $conn=mysql_connect($servername,$username,$password, $flag);
         if(!$conn)
         die("couldnt connect to database....");
         else
@@ -82,7 +82,8 @@ function generateMeta($conn, $databaseName){
     
 }
 
-function generateQuery($queryString){
+function generateQuery($queryString, $metaArray2){
+    
     $query_array = json_decode($queryString);
 
 
@@ -93,9 +94,12 @@ function generateQuery($queryString){
     $count = 0;
     $tables = array();
     $columns = array();
+    $wheres = array();
+    
     $tables[0] = "Hi";
     //var_dump($tables);
     for($i=0;$i < count($query_array) ;$i++){
+        $query_array[$i][2] = $query_array[$i][0] . '.' . $query_array[$i][1];
         if($i==0){
             $tables[$count] = $query_array[$i][0];
             $count++;
@@ -107,17 +111,45 @@ function generateQuery($queryString){
         }
         $columns[$i] = $query_array[$i][0]. '.' .$query_array[$i][1];
     };
-
+    //var_dump($query_array);
+    for($i=0, $wheresI=0;$i < count($query_array) ;$i++){
+        $key = $query_array[$i][2];
+        if( isset($metaArray2[$key]) ){
+            $pri = $metaArray2[$key];
+            //echo $pri;
+            //if(in_array($pri, $query_array))
+               // echo '<br/>' . $pri . ':' . in_array($pri, $query_array) . ':';
+            if($pri != 'PRI' && inarray($pri, $query_array, 2)){
+                $wheres[$wheresI] = ' ' . $key . ' = ' . $pri . ' ';
+                $wheresI++;
+            }
+        }
+    }
+    
 
     //echo implode(",", $tables);
     //echo implode(",", $columns);
     //var_dump($columns);
-
-    $finalQuery = 'SELECT ' . implode(",", $columns) . ' FROM ' . implode(",", $tables);
-    
+    //echo count($wheres);
+    if(count($wheres) > 0){
+        $finalQuery = 'SELECT ' . implode(",", $columns) . 
+                    ' FROM ' . implode(",", $tables) . 
+                    ' WHERE' . implode(" AND ", $wheres);
+    }
+    else{
+        $finalQuery = 'SELECT ' . implode(",", $columns) . ' FROM ' . implode(",", $tables);
+    }
     return $finalQuery;
 
 }
+function inarray($key, $array, $index){
+        for($i=0;$i<count($array);$i++){
+            if($key == $array[$i][$index])
+                return true;
+        }
+        return false;
+    }
+    
 function getQueryString($queryId, $conn){
     
     $query = "SELECT query_string from QUERIES WHERE queryid = '" . $queryId . "'";

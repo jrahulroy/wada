@@ -15,12 +15,16 @@ $queryId = isset($_GET['queryid'])?$_GET['queryid']:1;
  //$db=mysql_connect($host, $username, $password) or die('Could not connect');
    // mysql_select_db($db_name, $db) or die('');
 //echo $queryId;
-$query = generateQuery(getQueryString($queryId, $conn2));
 
-$conn = setconnection('localhost', 'root', '', 'sakila');
+
+$conn = setconnection('localhost', 'root', '', 'sakila', true);
 if(!$conn){
     die('Connection  Creation Failed');
 }
+
+$metaArray2 = generateMeta($conn, 'sakila');
+//$conn2 = setconnection('localhost', 'root', '', 'ui-data');
+$query = generateQuery(getQueryString($queryId, $conn2), $metaArray2);
 
 $result = mysql_query($query, $conn);
 $numRows = mysql_num_rows($result);
