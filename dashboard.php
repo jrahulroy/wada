@@ -15,7 +15,7 @@ include "dbconnect.php";
     </header>
     <section class="content">
         <section class="left">
-
+            <section class="left_header">
 
         <?php 
         
@@ -80,8 +80,8 @@ include "dbconnect.php";
             }
         }
         ?>
-            
-<a href="#" onclick="getData()">Process</a>
+            </section>
+            <section class="left_footer"><a href="#" onclick="getData()">Process</a></section>
         </section>
     
             
@@ -154,14 +154,14 @@ include "dbconnect.php";
         
             getString();
             
-            alert(JSON.stringify(data));
+            console.log(JSON.stringify(data));
             //alert(data);
             $.post(
                     "query_store.php", 
                     {query_string:JSON.stringify(data)},
                     function(data){
                         $('iframe').attr('src', 'display.php?query_id=' + data)
-                        alert(data);
+                        console.log(data);
                     }
                     
                 );

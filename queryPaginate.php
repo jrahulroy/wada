@@ -22,11 +22,17 @@ if(!$conn){
     die('Connection  Creation Failed');
 }
 
-$metaArray2 = generateMeta($conn, 'sakila');
+
 //$conn2 = setconnection('localhost', 'root', '', 'ui-data');
-$query = generateQuery(getQueryString($queryId, $conn2), $metaArray2);
+$storedQuery = getQueryString($queryId, $conn2);
+$metaArray2 = generateMeta($conn, $storedQuery['database']);
+$query = generateQuery($storedQuery['query'], $metaArray2);
+//echo $query;
+
 
 $result = mysql_query($query, $conn);
+//echo mysql_error();
+
 $numRows = mysql_num_rows($result);
 
 $query = $query . " LIMIT " . $offset . ", " . $limit;

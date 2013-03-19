@@ -104,11 +104,11 @@
 
 
     function onError(fromPage, toPage) {
-      alert("error loading pages " + fromPage + " to " + toPage);
+      console.log("error loading pages " + fromPage + " to " + toPage);
     }
 
     function onSuccess(resp) {
-        alert("success");
+        console.log("success");
       var from = this.fromPage * PAGESIZE, to = from + resp.count;
       data.length = parseInt(resp.total);
       //alert(resp.total);

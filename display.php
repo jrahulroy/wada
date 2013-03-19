@@ -19,13 +19,13 @@ $conn = setconnection($_SESSION["servername"],$_SESSION["uname"],$_SESSION["pwd"
 
 $queryId = isset($_GET['query_id'])?$_GET['query_id']:1;
 
-$queryString = getQueryString($queryId, $conn);
+$query = getQueryString($queryId, $conn);
 //echo $query_string . '<br />';
 $conn2=setconnection($_SESSION["servername"],$_SESSION["uname"],$_SESSION["pwd"],$_SESSION["database"]);
 $metaArray2 = generateMeta($conn, $_SESSION["database"]);
-$finalQuery = generateQuery($queryString, $metaArray2);
+$finalQuery = generateQuery($query['query'], $metaArray2);
 
-echo '<br/>' . $finalQuery;
+//echo '<br/>' . $finalQuery;
 //var_dump($tables);
 
 
@@ -33,7 +33,7 @@ if(!$conn2){
     die('Database Connectioin failed');
 }
 $finalRS = mysql_query($finalQuery . ' LIMIT 0,0', $conn2);
-echo $finalQuery;
+//echo $finalQuery;
 $i=0;
 while ($i < mysql_num_fields($finalRS)) {
     $meta = mysql_fetch_field($finalRS, $i);
@@ -85,15 +85,15 @@ while ($i < mysql_num_fields($finalRS)) {
  */
 ?>
         
-<div style="width:700px;float:left;">
-  <div class="grid-header" style="width:100%">
-    <label>Result</label>
+<div style="width:700px;margin:0 auto;">
+  <div class="display_header" style="width:100%">
+    
         <!--<span style="float:right;display:inline-block;">
           Search:
           <input type="text" id="txtSearch" value="apple">
         </span>-->
   </div>
-  <div id="myGrid" style="width:100%;height:600px;"></div>
+  <div id="myGrid" style="width:100%;height:400px;"></div>
   <div id="pager" style="width:100%;height:20px;"></div>
 </div>
 

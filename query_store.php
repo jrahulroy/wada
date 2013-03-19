@@ -12,11 +12,11 @@ $query_string = $_POST['query_string'];
 //echo $query_string;
 
 //echo "<br />";
-$query = "INSERT INTO QUERIES(query_string) VALUES ('" . mysql_real_escape_string($query_string) . "')";
+$query = "INSERT INTO QUERIES(databaseName, query_string ) VALUES ('" . $_SESSION["database"] . "','" . mysql_real_escape_string($query_string) . "')";
 //echo $query;
 //echo "<br />";
 mysql_query($query, $conn);
-
+//echo mysql_error();
 //echo mysql_error();
 
 $qid = mysql_insert_id();

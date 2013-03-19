@@ -152,19 +152,22 @@ function inarray($key, $array, $index){
     
 function getQueryString($queryId, $conn){
     
-    $query = "SELECT query_string from QUERIES WHERE queryid = '" . $queryId . "'";
+    $getQuery = "SELECT query_string, databaseName from QUERIES WHERE queryid = '" . $queryId . "'";
 
     //echo $query;
 
-    $resultSet = mysql_query($query, $conn);
+    $resultSet = mysql_query($getQuery, $conn);
     //var_dump($resultSet);
-    echo mysql_error();
+    //echo mysql_error();
     $queryResult = mysql_fetch_array($resultSet);
-echo mysql_error();
+    //echo mysql_error();
+    
+    $query['query'] = $queryResult[0];
+    $query['database'] = $queryResult[1];
 
-
-    $queryString =  $queryResult[0];
-    return $queryString;
+    //$queryString =  $queryResult[0];
+    //var_dump($query);
+    return $query;
 
 }
 ?>
