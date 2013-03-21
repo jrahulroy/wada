@@ -1,4 +1,15 @@
 <?php
+
+
+function defaultConnection($database = 'ui-data'){
+    $host = 'localhost';
+    $userName = 'root';
+    $password = '';
+    if($database == 'ui-data')
+        return setconnection($host,$userName,$password,$database);
+    else
+        return setconnection($host,$userName,$password,$database, true);
+}
 function setconnection($servername,$username,$password,$database, $flag = false)
 {
         $conn=mysql_connect($servername,$username,$password, $flag);
@@ -121,6 +132,7 @@ function generateQuery($queryString, $metaArray2){
                // echo '<br/>' . $pri . ':' . in_array($pri, $query_array) . ':';
             if($pri != 'PRI' && inarray($pri, $query_array, 2)){
                 $wheres[$wheresI] = ' ' . $key . ' = ' . $pri . ' ';
+                $columns = array_diff($columns, array($key));
                 $wheresI++;
             }
         }

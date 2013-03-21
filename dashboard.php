@@ -5,13 +5,18 @@ include "dbconnect.php";
 <html>
     <head>
         <title>UI-Data</title>
-        <link rel="stylesheet" href="style.css"/>
+        <link rel="stylesheet" href="css/reset.css"/>
+        <link rel="stylesheet" href="css/style.css"/>
         <script src="javascript/jquery-1.9.1.js"></script>
     </head>
 <body>
     <header>
-        <!--<img src="images/ninja.png"/>-->
-        <h1>Interactive UI Design</h1>
+        <div class="logo">
+            <img src="images/logo.png"/>
+        </div>
+        <div class="title">
+        <h1>Web Application for Data Access</h1>
+        </div>
     </header>
     <section class="content">
         <section class="left">
@@ -81,7 +86,9 @@ include "dbconnect.php";
         }
         ?>
             </section>
-            <section class="left_footer"><a href="#" onclick="getData()">Process</a></section>
+            <section class="left_footer"><button class="clean-gray" onclick="getData()">Process</button>
+            <button class="clean-gray" onclick="reset()">Reset</button>
+            </section>
         </section>
     
             
@@ -102,9 +109,10 @@ include "dbconnect.php";
             </section>
     </section>
     <footer>
-        <p>This is a Footer</o>
+        <p>&copy; MVSR Engineering College 2013</o>
     </footer>
     <script>
+        
         $(document).ready(function(){
             $('.tablename').click(function(){
                 $status = $(this).next().css('display') ;
@@ -244,7 +252,28 @@ include "dbconnect.php";
             });
             return tables;
         }
+        function reset(){
+            $('.select').each(function(){
+               $(this) .removeClass('select');
+            });
+            $('iframe').attr('src','');
+            $('.opr').each(function(){
+                if($(this).html() == '-'){
+                    //alert('-');
+                    $(this).parent().parent().click();
+                };
+            });
+            reflectState();
+        }
         reflectState();
+        
+        $(window).resize(function() {
+            //$('body').prepend('<div>' + $(window).width() + '</div>');
+            $height = $(window).height() - 95;
+            $('section.content').css('height', $height);
+            
+        });
+        $(window).resize();
     </script>
 </body>
 </html>

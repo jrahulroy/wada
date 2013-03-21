@@ -2,6 +2,8 @@
     <head>
         <title>Display a Query</title>
         
+        <link rel="stylesheet" href="css/reset.css" type="text/css"/>
+        <link rel="stylesheet" href="css/style.css" type="text/css"/>
         <link rel="stylesheet" href="css/jquery-ui-1.8.16.custom.css" type="text/css"/>
         <link rel="stylesheet" href="css/slick.grid.css" type="text/css"/>
         <link rel="stylesheet" href="css/examples.css" type="text/css"/>
@@ -95,6 +97,9 @@ while ($i < mysql_num_fields($finalRS)) {
   </div>
   <div id="myGrid" style="width:100%;height:400px;"></div>
   <div id="pager" style="width:100%;height:20px;"></div>
+  <div class="gridFooter" style="width:100%;height:20px;text-align: right;">
+      <button class="clean-gray" onclick="showQuery();">Export Query</button>
+      <button class="clean-gray" onclick="exportQuery();">Export</button>
 </div>
 
         
@@ -108,6 +113,12 @@ while ($i < mysql_num_fields($finalRS)) {
 <script src="javascript/slick.formatters.js"></script>
 <script src="javascript/slick.grid.js"></script>
 <script>
+    function exportQuery(){
+        window.location='queryExport.php?queryid=<?php echo $queryId; ?>';
+    }
+    function showQuery(){
+        alert('<?php echo $finalQuery?>');
+    }
   var grid;
   var loader = new Slick.Data.RemoteModel(<?php echo $queryId;?>);
   

@@ -44,10 +44,11 @@ $query = $query . " LIMIT " . $offset . ", " . $limit;
     $json = array();
     $json['data'] = array();
     if(mysql_num_rows($result)){
-            $row=mysql_fetch_assoc($result);
+        //$row=mysql_fetch_assoc($result);
+        //$test_data = array();
         while($row=mysql_fetch_row($result)){
             //  cast results to specific data types
-
+            //var_dump($row);
             $test_data[]=$row;
         }
         $json['data']=$test_data;

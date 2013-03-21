@@ -7,8 +7,19 @@ body{
 }
 header{
     height:65px;
-    
     font-color:#7EB5D6;
+    text-align:center;
+    background-color: #5f4819;
+    color:white;
+}
+.logo{
+    float:left;
+    width:350px;
+}
+.title{
+    /*float:left;
+    text-align:center;*/
+    
 }
 iframe{
     height:99%;
@@ -46,9 +57,10 @@ section.left{
 .left_footer{
     position:absolute;
     bottom:0px;
-    height:30px;
-    background-color: green;
+    height:34px;
+    background-color: #cfa247;
     width:100%;
+    text-align:center;
 }
 section.right{
     width:70%;
@@ -59,13 +71,20 @@ section.right{
     /*overflow-y: scroll;*/
 }
 footer{
-    background-image: -webkit-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.0)), url(images/bg-footer-noise.jpg);
-    height:30px;
+    background-color: #403011;
+    height:20px;
+    position:absolute;
+    bottom:0px;
+    width:100%;
+    color:white;
+    text-align: center;
+    padding-top:10px;
     /*background-color:blue;*/
 }
 .tables{
     padding:10px;
     font-size: 14px;
+    margin-bottom: 20px;
 }
 .table{
     font-weight: bold;
@@ -98,7 +117,7 @@ footer{
 }
 
 .select{
-    background-image:url('images/check.png');
+    background-image:url('../images/check.png');
     background-repeat: no-repeat;
     background-position: right;
     background-size: 20px;
@@ -196,12 +215,57 @@ background-size: 15px 10px;
 margin-right: 5px;
 }
 .pri{
-    background-image: url('images/pri.png');
+    background-image: url('../images/pri.png');
 }
 .for{
-    background-image: url('images/ext.png');
+    background-image: url('../images/ext.png');
 }
 h1{
     font-size: 50px;
     text-align:center;
 }
+
+/* Grid CSS */
+#myGrid{
+    font-size:10px;
+}
+.gridFooter a{
+    font-size: 20px;
+}
+
+/* clean gray
+*******************************************************************************/
+button.clean-gray {
+  background-color: #eeeeee;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #eeeeee), color-stop(100%, #cccccc));
+  background-image: -webkit-linear-gradient(top, #eeeeee, #cccccc);
+  background-image: -moz-linear-gradient(top, #eeeeee, #cccccc);
+  background-image: -ms-linear-gradient(top, #eeeeee, #cccccc);
+  background-image: -o-linear-gradient(top, #eeeeee, #cccccc);
+  background-image: linear-gradient(top, #eeeeee, #cccccc);
+  border: 1px solid #ccc;
+  border-bottom: 1px solid #bbb;
+  border-radius: 3px;
+  color: #333;
+  font: bold 11px/1 "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+  padding: 8px 0;
+  text-align: center;
+  text-shadow: 0 1px 0 #eee;
+  width: 150px; }
+  button.clean-gray:hover {
+    background-color: #dddddd;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #dddddd), color-stop(100%, #bbbbbb));
+    background-image: -webkit-linear-gradient(top, #dddddd, #bbbbbb);
+    background-image: -moz-linear-gradient(top, #dddddd, #bbbbbb);
+    background-image: -ms-linear-gradient(top, #dddddd, #bbbbbb);
+    background-image: -o-linear-gradient(top, #dddddd, #bbbbbb);
+    background-image: linear-gradient(top, #dddddd, #bbbbbb);
+    border: 1px solid #bbb;
+    border-bottom: 1px solid #999;
+    cursor: pointer;
+    text-shadow: 0 1px 0 #ddd; }
+  button.clean-gray:active {
+    border: 1px solid #aaa;
+    border-bottom: 1px solid #888;
+    -webkit-box-shadow: inset 0 0 5px 2px #aaaaaa, 0 1px 0 0 #eeeeee;
+    box-shadow: inset 0 0 5px 2px #aaaaaa, 0 1px 0 0 #eeeeee; }
