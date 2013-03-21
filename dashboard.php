@@ -5,6 +5,7 @@ include "dbconnect.php";
 <html>
     <head>
         <title>UI-Data</title>
+        <link rel="icon" type="image/png" href="images/logo.png" >
         <link rel="stylesheet" href="css/reset.css"/>
         <link rel="stylesheet" href="css/style.css"/>
         <script src="javascript/jquery-1.9.1.js"></script>
@@ -155,6 +156,7 @@ include "dbconnect.php";
                 reflectState();
                //alert($(this).parent().find('.pri').parent().addClass('select'));
             });
+            windowResize();
         });
         
         var data = new Array();
@@ -267,13 +269,16 @@ include "dbconnect.php";
         }
         reflectState();
         
-        $(window).resize(function() {
+        function windowResize() {
             //$('body').prepend('<div>' + $(window).width() + '</div>');
+            console.log('Event: Window Resize')
             $height = $(window).height() - 95;
             $('section.content').css('height', $height);
             
-        });
-        $(window).resize();
+        }
+        $(window).resize(windowResize);
+        
+       
     </script>
 </body>
 </html>

@@ -149,7 +149,7 @@ function generateQuery($queryString, $metaArray2){
                     ' WHERE' . implode(" AND ", $wheres);
     }
     else{
-        $finalQuery = 'SELECT ' . implode(",", $columns) . ' FROM ' . implode(",", $tables);
+        $finalQuery = 'SELECT ' . implode(", ", $columns) . ' FROM ' . implode(", ", $tables);
     }
     return $finalQuery;
 
