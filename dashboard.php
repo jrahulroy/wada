@@ -8,6 +8,8 @@ include "dbconnect.php";
         <link rel="icon" type="image/png" href="images/logo.png" >
         <link rel="stylesheet" href="css/reset.css"/>
         <link rel="stylesheet" href="css/style.css"/>
+        <link href="css/jquery.mCustomScrollbar.css" rel="stylesheet" type="text/css" />
+        
         <script src="javascript/jquery-1.9.1.js"></script>
     </head>
 <body>
@@ -112,6 +114,7 @@ include "dbconnect.php";
     <footer>
         <p>&copy; MVSR Engineering College 2013</o>
     </footer>
+    <script src="javascript/jquery.mCustomScrollbar.min.js"></script>
     <script>
         
         $(document).ready(function(){
@@ -157,6 +160,16 @@ include "dbconnect.php";
                //alert($(this).parent().find('.pri').parent().addClass('select'));
             });
             windowResize();
+            
+             $(window).load(function(){
+                    $(".left_header").mCustomScrollbar({
+                        advanced:{
+						autoExpandVerticalScroll:true,
+                                                updateOnContentResize: true
+					}
+                    });
+             });
+            
         });
         
         var data = new Array();
@@ -274,6 +287,7 @@ include "dbconnect.php";
             console.log('Event: Window Resize')
             $height = $(window).height() - 95;
             $('section.content').css('height', $height);
+            $('.left_header').css('height', $height - 34);
             
         }
         $(window).resize(windowResize);
