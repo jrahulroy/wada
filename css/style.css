@@ -38,7 +38,7 @@ header img{
 section.left{
     cursor:pointer;
     /*border-radius: inherit;*/
-    width:30%;
+    width:350px;
     /*min-width:200px;*/
     float:left;
     background-color:#DFC184;
@@ -62,13 +62,20 @@ section.left{
     width:100%;
     text-align:center;
 }
-section.right{
-    width:70%;
+section.center{
+    width:325px;
     /*min-width:800px;*/
-    float:right;
+    float:left;
     /*background-color:aqua;*/
     height:100%;
     /*overflow-y: scroll;*/
+}
+section.right{
+    width:250px;
+    float:right;
+    height:100%;
+    background-color:#DFC184;
+    font-color:#644436;
 }
 footer{
     background-color: #403011;
