@@ -36,7 +36,10 @@ $finalQuery = generateQuery($query['query'], $metaArray2);
 if(!$conn2){
     die('Database Connectioin failed');
 }
-$finalRS = mysql_query($finalQuery . ' LIMIT 0,0', $conn2);
+$runTime = microtime(true);
+$finalRS = mysql_query($finalQuery, $conn2);
+$runTime = microtime(true) - $runTime;
+$rowCount = mysql_num_rows($finalRS);
 //echo $finalQuery;
 $i=0;
 while ($i < mysql_num_fields($finalRS)) {
@@ -89,7 +92,7 @@ while ($i < mysql_num_fields($finalRS)) {
  */
 ?>
         
-<div style="width:700px;margin:0 auto;">
+<div style="width:100%;margin:0 auto;">
   <div class="display_header" style="width:100%">
     
         <!--<span style="float:right;display:inline-block;">
@@ -100,12 +103,16 @@ while ($i < mysql_num_fields($finalRS)) {
   <div id="myGrid" style="width:100%;height:400px;"></div>
   <div id="pager" style="width:100%;height:20px;"></div>
   <div class="gridFooter" style="width:100%;height:20px;text-align: right;">
-      <button class="clean-gray inline" href="#query_content" >Export Query</button>
+      <div id="queryInfo">
+        <p>Row Count : <?php echo $rowCount;?></p>
+        <p>Execution Time : <?php echo $runTime ?>
+      </div>
+      <button class="clean-gray inline" href="#queryContent" >Export Query</button>
       <button class="clean-gray"  onclick="exportQuery();" >Export</button><!---->
 </div>
   
   <div style='display:none'>
-			<div id='query_content'>
+			<div id='queryContent'>
                             <p><?php echo $finalQuery?></p>
 			</div>
 		</div>
@@ -188,8 +195,10 @@ while ($i < mysql_num_fields($finalRS)) {
       }
 
       loadingIndicator.show();
-      $(".inline").colorbox({inline:true, title:'Export Query'
-         // , maxWidth: '300px'
+      $(".inline").colorbox({inline:true, title:'Export Query',
+         maxWidth: '70%',
+         maxHeight: '70%',
+         scrolling: false
       });
     });
 

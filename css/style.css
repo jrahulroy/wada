@@ -22,8 +22,8 @@ header{
     
 }
 iframe{
-    height:99%;
-    width:99%;
+    height:100%;
+    width:100%;
 }
 header img{
     height:100%;
@@ -240,7 +240,13 @@ h1{
 .gridFooter a{
     font-size: 20px;
 }
-
+#queryInfo{
+    text-align: left;
+    float:left;
+}
+#queryContent{
+    padding:20px;
+}
 /* clean gray
 *******************************************************************************/
 button.clean-gray {
@@ -277,3 +283,4 @@ button.clean-gray {
     border-bottom: 1px solid #888;
     -webkit-box-shadow: inset 0 0 5px 2px #aaaaaa, 0 1px 0 0 #eeeeee;
     box-shadow: inset 0 0 5px 2px #aaaaaa, 0 1px 0 0 #eeeeee; }
+  

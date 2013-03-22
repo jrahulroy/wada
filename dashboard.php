@@ -305,7 +305,7 @@ include "dbconnect.php";
             //alert($width);
             $('section.center').css('width', $width);
             
-           alert('Section Height: ' + ($height));
+           //alert('Section Height: ' + ($height));
             
             //alert('Section Height: ' + ($height - 95));
             $('section.content').css('height', $height -95);
