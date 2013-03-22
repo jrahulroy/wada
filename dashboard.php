@@ -291,25 +291,28 @@ include "dbconnect.php";
         
         function windowResize() {
             //$('body').prepend('<div>' + $(window).width() + '</div>');
-            /*console.log('Event: Window Resize')
+            console.log('Event: Window Resize')
            
             $height=0, $width=0;
            
             $height = $(window).height();
             $width = $(window).width();
-           
+            
+            $leftWidth = 350;//$('section.left').css('width').replace('px','');;
+            $rightWidth = 250;//$('section.right').css('width').replace('px','');;
+            //alert($width + ' ' + $leftWidth + ' ' +$rightWidth );
+            $width = $(window).width() - $leftWidth - $rightWidth;
+            //alert($width);
+            $('section.center').css('width', $width);
+            
+           alert('Section Height: ' + ($height));
             
             //alert('Section Height: ' + ($height - 95));
             $('section.content').css('height', $height -95);
             $('.left_header').css('height', $height - 34 -95);
             
             
-            /*$leftWidth = 350;//$('section.left').css('width').replace('px','');;
-            $rightWidth = 250;//$('section.right').css('width').replace('px','');;
-            //alert($width + ' ' + $leftWidth + ' ' +$rightWidth );
-            $width = $(window).width() - $leftWidth - $rightWidth;
-            //alert($width);
-            $('section.center').css('width', $width);*/
+            
             
         }
         
