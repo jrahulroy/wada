@@ -1,9 +1,12 @@
 @import url(http://fonts.googleapis.com/css?family=Habibi);
 
-body{
+body.dash{
     font-family: 'Habibi', serif;
     background-color: #0769AD;
     margin:0px;
+    min-height:600px;
+    min-width:1024px;
+    position:relative;
 }
 header{
     height:65px;
@@ -30,7 +33,8 @@ header img{
 }
 .content{
     /*margin:20px 0;*/
-    height:530px;
+    min-height:515px;
+    min-width:1024px;
     background-color:red;
     /*border-radius: 20px;*/
     background-color:white;
@@ -65,7 +69,7 @@ section.left{
 }
 section.center{
     width:325px;
-    /*min-width:800px;*/
+    min-width:424px;
     float:left;
     /*background-color:aqua;*/
     height:100%;

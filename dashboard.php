@@ -12,7 +12,7 @@ include "dbconnect.php";
         
         <script src="javascript/jquery-1.9.1.js"></script>
     </head>
-<body>
+<body class="dash">
     <header>
         <div class="logo">
             <img src="images/logo.png"/>
