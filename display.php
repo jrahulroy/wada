@@ -149,9 +149,9 @@ while ($i < mysql_num_fields($finalRS)) {
       $len = sizeof($columns);
       for($i=0;$i<$len;$i++){
           if($i == $len - 1)
-            echo '{id: "' . $i . '", name: "' . $columns[$i] . '", field: ' . $i .'}';
+            echo '{id: "' . $i . '", name: "' . $columns[$i] . '", field: ' . $i .', sortable: true}';
           else
-              echo '{id: "' . $i . '", name: "' . $columns[$i] . '", field: ' . $i .'},';
+              echo '{id: "' . $i . '", name: "' . $columns[$i] . '", field: ' . $i .', sortable: true}, ';
       }?>
     
   ];

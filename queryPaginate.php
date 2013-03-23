@@ -11,7 +11,9 @@ $conn2 = setconnection('localhost', 'root', '', 'ui-data');
 $offset = isset($_GET['offset'])?$_GET['offset']:0;
 $limit = isset($_GET['limit'])?$_GET['limit']:100;
 $callback = isset($_GET['callback'])?$_GET['callback']:'C';
-$queryId = isset($_GET['queryid'])?$_GET['queryid']:1;
+$queryId = isset($_GET['queryid'])?$_GET['queryid']:1 ;
+$sortCol = isset($_GET['sortcol'])?$_GET['sortcol']:null;
+$sortOrder = isset($_GET['sortorder'])?$_GET['sortorder']:"asc";
  //$db=mysql_connect($host, $username, $password) or die('Could not connect');
    // mysql_select_db($db_name, $db) or die('');
 //echo $queryId;
@@ -36,8 +38,19 @@ $result = mysql_query($query, $conn);
 
 $numRows = mysql_num_rows($result);
 
+if($sortCol != null){
+    $sortCol += 1;
+    $query = $query . " ORDER BY " . $sortCol . " " . $sortOrder;
+}
+
 $query = $query . " LIMIT " . $offset . ", " . $limit;
 //echo $query;
+
+//Implementing Sorting Condition
+
+
+
+
 
     $result = mysql_query($query, $conn); //or die('Could not query');
     echo mysql_error();

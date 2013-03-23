@@ -72,11 +72,16 @@
           + "queryid=" + queryId
           + "&offset=" + (fromPage * PAGESIZE) + "&limit=" + (((toPage - fromPage) * PAGESIZE) + PAGESIZE);
 
-      switch (sortcol) {
+      
+      /*switch (sortcol) {
         case "diggs":
           url += ("&sort=" + ((sortdir > 0) ? "digg_count-asc" : "digg_count-desc"));
           break;
-      }
+      }*/
+        if(sortcol != null){
+            console.log("Sorting : " + sortcol);
+            url += ("&sortcol=" + sortcol + "&sortorder=" + ((sortdir > 0) ? "asc" : "desc"));
+        }
 
       if (h_request != null) {
         clearTimeout(h_request);
