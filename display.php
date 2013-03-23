@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="css/style.css" type="text/css"/>
         <link rel="stylesheet" href="css/jquery-ui-1.8.16.custom.css" type="text/css"/>
         <link rel="stylesheet" href="css/slick.grid.css" type="text/css"/>
+        <link rel="stylesheet" href="css/slick.pager.css" type="text/css"/>
         <link rel="stylesheet" href="css/examples.css" type="text/css"/>
         <link rel="stylesheet" href="css/colorbox.css" type="text/css"/>
         
@@ -101,7 +102,36 @@ while ($i < mysql_num_fields($finalRS)) {
         </span>-->
   </div>
   <div id="myGrid" style="width:100%;height:400px;"></div>
-  <div id="pager" style="width:100%;height:20px;"></div>
+  <div id="pager" style="width:100%;height:30px;">
+      <div class="slick-pager">
+          <span class="slick-pager-nav">
+              <span class="ui-state-default ui-corner-all ui-icon-container">
+                  <span class="ui-icon ui-icon-seek-first ui-state-enabled">
+                      
+                  </span>
+                  
+              </span>
+              <span class="ui-state-default ui-corner-all ui-icon-container">
+                  <span class="ui-icon ui-icon-seek-prev ui-state-enabled">
+                      
+                  </span>
+                  
+              </span>
+              <span class="ui-state-default ui-corner-all ui-icon-container">
+                  <span class="ui-icon ui-icon-seek-next ui-state-enabled">
+                      
+                  </span></span>
+              <span class="ui-state-default ui-corner-all ui-icon-container">
+                  <span class="ui-icon ui-icon-seek-end ui-state-enabled">
+                      
+                  </span>
+                  
+              </span>
+              
+          </span>
+          <span class="slick-pager-status">Showing page 1 of 1</span>
+      </div>
+  </div>
   <div class="gridFooter" style="width:100%;height:20px;text-align: right;">
       <div id="queryInfo">
         <p>Row Count : <?php echo $rowCount;?></p>
@@ -109,7 +139,7 @@ while ($i < mysql_num_fields($finalRS)) {
       </div>
       <button class="clean-gray inline" href="#queryContent" >Export Query</button>
       <button class="clean-gray"  onclick="exportQuery();" >Export</button><!---->
-</div>
+    </div>
   
   <div style='display:none'>
 			<div id='queryContent'>
@@ -127,6 +157,7 @@ while ($i < mysql_num_fields($finalRS)) {
 <script src="javascript/slick.remotemodel.js"></script>
 <script src="javascript/slick.formatters.js"></script>
 <script src="javascript/slick.grid.js"></script>
+
 
 <script src="javascript/jquery.colorbox-min.js"></script>
 <script>
@@ -166,12 +197,16 @@ while ($i < mysql_num_fields($finalRS)) {
 
   var loadingIndicator = null;
 
-
+  $canvasHeight = 0;
   $(function () {
-    grid = new Slick.Grid("#myGrid", loader.data, columns, options);
+    
+        
+        grid = new Slick.Grid("#myGrid", loader.data, columns, options);
+        
     //console.log(loader.data);
     //console.log(columns);
-
+    
+        
     grid.onViewportChanged.subscribe(function (e, args) {
       var vp = grid.getViewport();
       loader.ensureData(vp.top, vp.bottom);
@@ -211,6 +246,7 @@ while ($i < mysql_num_fields($finalRS)) {
       grid.render();
 
       loadingIndicator.fadeOut();
+      $canvasHeight = $('.grid-canvas').height();
     });
 
     /*$("#txtSearch").keyup(function (e) {
@@ -223,6 +259,43 @@ while ($i < mysql_num_fields($finalRS)) {
 
     // load the first page
     grid.onViewportChanged.notify();
+    
+    //Paginate Icons
+    $gridHeight = $('.slick-viewport').height();
+    $canvasHeight = $('.grid-canvas').height();
+    //alert($canvasHeight);
+    $('.ui-icon-seek-next').click(function(){
+        //alert('scroll');
+        //$('.slick-viewport').scrollTo( '+=' + $gridHeight, 800 );
+        $gridScroll = $('.slick-viewport').scrollTop();
+        //alert($gridScroll);
+        $('.slick-viewport').animate({ 
+            scrollTop: ($gridScroll + $gridHeight)}, 
+            1400, 
+            "easeOutQuint"
+         );
+    
+    });
+    $('.ui-icon-seek-prev').click(function(){
+        //alert('scroll');
+        //$('.slick-viewport').scrollTo( '-=' + $gridHeight, 800 );
+        $gridScroll = $('.slick-viewport').scrollTop();
+        $('.slick-viewport').animate({ 
+            scrollTop: ($gridScroll - $gridHeight)}, 
+            1400, 
+            "easeOutQuint"
+         );
+    });
+    $('.ui-icon-seek-end').click(function(){
+        //alert('scroll');
+        //$('.slick-viewport').scrollTo( '100%', 800 );
+        $('.slick-viewport').scrollTo($canvasHeight);
+    });
+    $('.ui-icon-seek-first').click(function(){
+        //alert('scroll');
+        $('.slick-viewport').scrollTo(0);
+    });
+    
   })
 </script>
 
