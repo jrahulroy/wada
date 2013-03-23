@@ -192,7 +192,9 @@ while ($i < mysql_num_fields($finalRS)) {
     editable: false,
     enableAddRow: false,
     enableCellNavigation: true,
-    forceFitColumns:true
+    forceFitColumns:true,
+    showHeaderRow: true,
+    headerRowHeight: 30
   };
 
   var loadingIndicator = null;
@@ -289,11 +291,11 @@ while ($i < mysql_num_fields($finalRS)) {
     $('.ui-icon-seek-end').click(function(){
         //alert('scroll');
         //$('.slick-viewport').scrollTo( '100%', 800 );
-        $('.slick-viewport').scrollTo($canvasHeight);
+        $('.slick-viewport').scrollTop($canvasHeight);
     });
     $('.ui-icon-seek-first').click(function(){
         //alert('scroll');
-        $('.slick-viewport').scrollTo(0);
+        $('.slick-viewport').scrollTop(0);
     });
     
   })
