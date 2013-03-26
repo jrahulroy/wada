@@ -132,7 +132,9 @@ function generateQuery($queryString, $metaArray2){
                // echo '<br/>' . $pri . ':' . in_array($pri, $query_array) . ':';
             if($pri != 'PRI' && inarray($pri, $query_array, 2)){
                 $wheres[$wheresI] = ' ' . $key . ' = ' . $pri . ' ';
-                $columns = array_diff($columns, array($key));
+                //var_dump($columns);
+                //var_dump($key);
+                $columns = array_values(array_diff($columns, array($key)));
                 $wheresI++;
             }
         }
@@ -151,8 +153,11 @@ function generateQuery($queryString, $metaArray2){
     else{
         $finalQuery = 'SELECT ' . implode(", ", $columns) . ' FROM ' . implode(", ", $tables);
     }
-    return $finalQuery;
-
+    //return $finalQuery;
+    $final['finalQuery'] = $finalQuery;
+    $final['columns'] = $columns;
+    
+    return $final;
 }
 function inarray($key, $array, $index){
         for($i=0;$i<count($array);$i++){

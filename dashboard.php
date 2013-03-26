@@ -111,9 +111,9 @@ include "dbconnect.php";
                 <iframe name="myFrame" src="">
                 </iframe>
             </section>
-            <section class="right">
+            <!--<section class="right">
                 <p>This is the Right Side Part</p>
-            </section>
+            </section>-->
     </section>
     <footer>
         <p>&copy; MVSR Engineering College 2013</o>
@@ -301,7 +301,7 @@ include "dbconnect.php";
             $leftWidth = 350;//$('section.left').css('width').replace('px','');;
             $rightWidth = 250;//$('section.right').css('width').replace('px','');;
             //alert($width + ' ' + $leftWidth + ' ' +$rightWidth );
-            $width = $(window).width() - $leftWidth - $rightWidth;
+            $width = $(window).width() - $leftWidth; //- $rightWidth;
             //alert($width);
             $('section.center').css('width', $width);
             

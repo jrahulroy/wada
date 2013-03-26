@@ -70,7 +70,7 @@ section.left{
 }
 section.center{
     width:325px;
-    min-width:424px;
+    min-width:674px;
     float:left;
     /*background-color:aqua;*/
     height:100%;
@@ -173,15 +173,13 @@ span.opr{
 
 
 #optionsdiv
-{ position:absolute;
+{ 
+        position:absolute;
 	height:600;
 	width:300;
 	border:solid 4px #000;
 	background-color:#903 ;
 	margin-top:-35;
-   
-   
-
 }
 #tablediv
 {
@@ -245,9 +243,15 @@ h1{
 .gridFooter a{
     font-size: 20px;
 }
+
+#queryInfo p {
+display: inline;
+padding: 10px;
+}
 #queryInfo{
     text-align: left;
     float:left;
+    padding:10px;
 }
 #queryContent{
     padding:20px;

@@ -28,8 +28,8 @@ $query = getQueryString($queryId, $conn);
 //echo $query_string . '<br />';
 $conn2=setconnection($_SESSION["servername"],$_SESSION["uname"],$_SESSION["pwd"],$_SESSION["database"]);
 $metaArray2 = generateMeta($conn, $_SESSION["database"]);
-$finalQuery = generateQuery($query['query'], $metaArray2);
-
+$generatedQuery = generateQuery($query['query'], $metaArray2);
+$finalQuery = $generatedQuery['finalQuery'];
 //echo '<br/>' . $finalQuery;
 //var_dump($tables);
 
@@ -166,6 +166,8 @@ while ($i < mysql_num_fields($finalRS)) {
     }
    
   var grid;
+  $focussedElement='';
+  var filters = [];
   var loader = new Slick.Data.RemoteModel(<?php echo $queryId;?>);
   
   //loader.queryId = <?php echo $queryId;?>;
@@ -200,8 +202,49 @@ while ($i < mysql_num_fields($finalRS)) {
   var loadingIndicator = null;
 
   $canvasHeight = 0;
-  $(function () {
+  $(document).ready(function(){
+      loadGrid();
+      
+      //Paginate Icons
+    $gridHeight = $('.slick-viewport').height();
+    $canvasHeight = $('.grid-canvas').height();
+    //alert($canvasHeight);
+    $('.ui-icon-seek-next').click(function(){
+        //alert('scroll');
+        //$('.slick-viewport').scrollTo( '+=' + $gridHeight, 800 );
+        $gridScroll = $('.slick-viewport').scrollTop();
+        //alert($gridScroll);
+        //alert($gridScroll + $gridHeight);
+        $('.slick-viewport').animate({ 
+            scrollTop: ($gridScroll + $gridHeight)}, 
+            1400, 
+            "easeOutQuint"
+         );
     
+    });
+    $('.ui-icon-seek-prev').click(function(){
+        //alert('scroll');
+        //$('.slick-viewport').scrollTo( '-=' + $gridHeight, 800 );
+        $gridScroll = $('.slick-viewport').scrollTop();
+        $('.slick-viewport').animate({ 
+            scrollTop: ($gridScroll - $gridHeight)}, 
+            1400, 
+            "easeOutQuint"
+         );
+    });
+    $('.ui-icon-seek-end').click(function(){
+        //alert('scroll');
+        //$('.slick-viewport').scrollTo( '100%', 800 );
+        $('.slick-viewport').scrollTop($canvasHeight);
+    });
+    $('.ui-icon-seek-first').click(function(){
+        //alert('scroll');
+        $('.slick-viewport').scrollTop(0);
+    });
+      
+  });
+  function loadGrid() {
+      var loader = new Slick.Data.RemoteModel(<?php echo $queryId;?>);
         
         grid = new Slick.Grid("#myGrid", loader.data, columns, options);
         
@@ -262,43 +305,51 @@ while ($i < mysql_num_fields($finalRS)) {
     // load the first page
     grid.onViewportChanged.notify();
     
-    //Paginate Icons
-    $gridHeight = $('.slick-viewport').height();
-    $canvasHeight = $('.grid-canvas').height();
-    //alert($canvasHeight);
-    $('.ui-icon-seek-next').click(function(){
-        //alert('scroll');
-        //$('.slick-viewport').scrollTo( '+=' + $gridHeight, 800 );
-        $gridScroll = $('.slick-viewport').scrollTop();
-        //alert($gridScroll);
-        $('.slick-viewport').animate({ 
-            scrollTop: ($gridScroll + $gridHeight)}, 
-            1400, 
-            "easeOutQuint"
-         );
     
+    
+    //var headerColumnCount = 0;
+    $i=0;
+    $('.slick-headerrow-column').each(function(){
+       //alert($(this).attr('class').split(' ').filter('r'));
+       //alert('hi');
+        if(typeof filters[$i] != 'undefined'){
+            value = filters[$i];
+        }
+        else{
+            value = '';
+        }
+        $(this).append("<input id = 'filter-" + ($i+1) + "' value='" + value + "' type='text' />");
+        $i++;
     });
-    $('.ui-icon-seek-prev').click(function(){
-        //alert('scroll');
-        //$('.slick-viewport').scrollTo( '-=' + $gridHeight, 800 );
-        $gridScroll = $('.slick-viewport').scrollTop();
-        $('.slick-viewport').animate({ 
-            scrollTop: ($gridScroll - $gridHeight)}, 
-            1400, 
-            "easeOutQuint"
-         );
-    });
-    $('.ui-icon-seek-end').click(function(){
-        //alert('scroll');
-        //$('.slick-viewport').scrollTo( '100%', 800 );
-        $('.slick-viewport').scrollTop($canvasHeight);
-    });
-    $('.ui-icon-seek-first').click(function(){
-        //alert('scroll');
-        $('.slick-viewport').scrollTop(0);
+    if($focussedElement){
+        $('#' + $focussedElement).focus();
+    }
+    $('.slick-headerrow').keyup(function(){
+       console.log('Key Down') ;
+       //headerColumnCount = 0;
+       filters = [];
+       $('.slick-headerrow-column').each(function(){
+                   $filterValue = $(this).children().val();
+                   filters.push($filterValue);
+       });
+              
+       console.log(filters);
+       $focussedElement = $(document.activeElement).attr('id');
+       loadGrid();
+       //loader.
+       
+       //var loader = new Slick.Data.RemoteModel(<?php echo $queryId;?>);
+       //var vp = grid.getViewport();
+       //loader.ensureData(vp.top, vp.bottom);
+       //grid = new Slick.Grid("#myGrid", loader.data, columns, options);
+       //grid.invalidate();
+       //grid.updateRowCount();
+       //grid.render();
+       //grid.render();
+       // grid.onViewportChanged.notify();
     });
     
-  })
+  }
 </script>
 
     </body>

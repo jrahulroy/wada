@@ -82,6 +82,12 @@
             console.log("Sorting : " + sortcol);
             url += ("&sortcol=" + sortcol + "&sortorder=" + ((sortdir > 0) ? "asc" : "desc"));
         }
+        if(filters.length > 0){
+            url += "&filters=" + filters.length;
+            for(i=0;i<filters.length;i++){
+                url += "&filter" + (i+1) + "=" + filters[i];
+            }
+        }
 
       if (h_request != null) {
         clearTimeout(h_request);
