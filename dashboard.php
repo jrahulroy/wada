@@ -298,7 +298,7 @@ include "dbconnect.php";
             $height = $(window).height();
             $width = $(window).width();
             
-            $leftWidth = 200;//$('section.left').css('width').replace('px','');;
+            $leftWidth = 250;//$('section.left').css('width').replace('px','');;
             $rightWidth = 250;//$('section.right').css('width').replace('px','');;
             //alert($width + ' ' + $leftWidth + ' ' +$rightWidth );
             $width = $(window).width() - $leftWidth; //- $rightWidth;
