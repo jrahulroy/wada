@@ -1,7 +1,7 @@
 @import url(http://fonts.googleapis.com/css?family=Habibi);
 
 body.dash{
-    font-family: 'Habibi', serif;
+    /*font-family: 'Habibi', serif;*/
     background-color: #0769AD;
     margin:0px;
     min-height:600px;
@@ -44,11 +44,13 @@ header img{
 section.left{
     cursor:pointer;
     /*border-radius: inherit;*/
-    width:350px;
+    width:200px;
     /*min-width:200px;*/
     float:left;
     background-color:#DFC184;
     font-color:#644436;
+    font:arial;
+    font-size:10px;
     height:100%;
     position:relative;
     /*overflow-y: scroll;*/
@@ -63,7 +65,7 @@ section.left{
 .left_footer{
     position:absolute;
     bottom:0px;
-    height:34px;
+    /*height:34px;*/
     background-color: #cfa247;
     width:100%;
     text-align:center;
@@ -100,7 +102,7 @@ footer{
     /*margin-bottom: 20px;*/
 }
 .table{
-    font-weight: bold;
+    /*font-weight: bold;*/
     /*padding:5px;*/
     vertical-align: central;
     margin:4px;
@@ -115,7 +117,8 @@ footer{
 }
 .tablename, .column{
     text-transform: capitalize;
-    height:25px;
+    /*height:25px;*/
+    padding:2px;
     padding-left:15px;
     transition: all 0.3s;
     -moz-transition: all 0.3s;
@@ -124,6 +127,7 @@ footer{
 }
 .column{
     padding-left:0px;
+    
 }
 .tablename:hover, .column:hover{
     background-color: white;
@@ -145,6 +149,7 @@ footer{
     -o-transition: all 0.3s;
     display:none;
     padding-left: 40px;
+    margin:10px 0;
 }
 span.opr{
     width:15px;

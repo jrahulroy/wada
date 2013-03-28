@@ -298,7 +298,7 @@ include "dbconnect.php";
             $height = $(window).height();
             $width = $(window).width();
             
-            $leftWidth = 350;//$('section.left').css('width').replace('px','');;
+            $leftWidth = 200;//$('section.left').css('width').replace('px','');;
             $rightWidth = 250;//$('section.right').css('width').replace('px','');;
             //alert($width + ' ' + $leftWidth + ' ' +$rightWidth );
             $width = $(window).width() - $leftWidth; //- $rightWidth;
@@ -309,7 +309,7 @@ include "dbconnect.php";
             
             //alert('Section Height: ' + ($height - 95));
             $('section.content').css('height', $height -95);
-            $('.left_header').css('height', $height - 34 -95);
+            $('.left_header').css('height', $height - 68 -95);
             
             
             
