@@ -7,21 +7,18 @@ $queryId = isset($_GET['queryid'])?$_GET['queryid']:1;
 $uiConn = defaultConnection();
 $query = getQueryString($queryId, $uiConn);
 echo mysql_error();
-$dataConn = setconnection($_SESSION["servername"],$_SESSION["uname"],$_SESSION["pwd"],$_SESSION["database"], true);;
-
-$DB_Server = "localhost"; 
-$DB_Username = "root"; 
-$DB_Password = "";        
-$DB_DBName = "sakila";       
-$DB_TBLName = "actor";
+//echo $_SESSION["servername"];
+$dataConn = setconnection($_SESSION["servername"],$_SESSION["uname"],$_SESSION["pwd"],$_SESSION["database"]);
 
 $filename = "query_" . $queryId;    
 
 $metaArray2 = generateMeta($dataConn, $query['database']);
+//var_dump($metaArray2);
 $sql = generateQuery($query['query'], $metaArray2);
+//var_dump($sql);
 //$Connect = mysql_connect($DB_Server, $DB_Username, $DB_Password);
 //$Db = mysql_select_db($DB_DBName, $Connect);
-$result = mysql_query($sql,$dataConn);
+$result = mysql_query($sql['finalQuery'],$dataConn);
 echo mysql_error();
 
 $file_ending = "xls";
