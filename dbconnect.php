@@ -96,7 +96,7 @@ function generateMeta($conn, $databaseName){
     
 }
 
-function generateQuery($queryString, $metaArray2){
+function generateQuery($queryString, $metaArray2, $seperator = ''){
     
     $query_array = json_decode($queryString);
 
@@ -148,14 +148,24 @@ function generateQuery($queryString, $metaArray2){
     //echo implode(",", $columns);
     //var_dump($columns);
     //echo count($wheres);
-    if(count($wheres) > 0){
-        $finalQuery = 'SELECT ' . implode(",", $columns) . 
-                    ' FROM ' . implode(",", $tables) . 
-                    ' WHERE' . implode(" AND ", $wheres);
-    }
-    else{
-        $finalQuery = 'SELECT ' . implode(", ", $columns) . ' FROM ' . implode(", ", $tables);
-    }
+ 
+ 
+        if(count($wheres) > 0){
+            $finalQuery = 'SELECT ' . $seperator . 
+                            implode(",", $columns) . $seperator .
+                            ' FROM ' . $seperator .
+                            implode(",", $tables) . $seperator .
+                            ' WHERE' . $seperator .
+                            implode(" AND ", $wheres);
+        }
+        else{
+            $finalQuery = 'SELECT ' . $seperator .
+                            implode(", ", $columns) . $seperator .
+                            ' FROM ' . $seperator .
+                            implode(", ", $tables);
+        }
+ 
+    
     //return $finalQuery;
     $final['finalQuery'] = $finalQuery;
     $final['columns'] = $columns;

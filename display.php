@@ -148,7 +148,11 @@ while ($i < mysql_num_fields($finalRS)) {
   
   <div style='display:none'>
 			<div id='queryContent'>
-                            <p><?php echo $finalQuery?></p>
+                            <p><?php 
+                            $generatedQuery = generateQuery($query['query'], $metaArray2, '<br>');
+                            $finalQuery = $generatedQuery['finalQuery'];
+                            echo $finalQuery
+                            ?></p>
 			</div>
 		</div>
 
