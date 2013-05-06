@@ -13,13 +13,16 @@ function defaultConnection($database = 'ui-data'){
 function setconnection($servername,$username,$password,$database, $flag = false)
 {
         $conn=mysql_connect($servername,$username,$password, $flag);
-        if(!$conn)
-        die("couldnt connect to database....");
+        if(!$conn){
+            echo "setConnection = FuncParams - " . $servername . " - ". $username . " - ". $password . " - ". $database . " - ". $flag;
+            die("couldnt connect to database....");
+        }
         else
         {
         if(!mysql_select_db($database,$conn))
         {
-        die("couldnt connect defined database....");
+            echo "setConnection = FuncParams - " . $servername . " - ". $username . " - ". $password . " - ". $database . " - ". $flag;
+            die("couldnt connect defined database....");
         }
         else
         {
@@ -174,15 +177,16 @@ function getQueryString($queryId, $conn){
     //echo $query;
 
     $resultSet = mysql_query($getQuery, $conn);
-    //var_dump($resultSet);
-    //echo mysql_error();
+   // var_dump($resultSet);
+   //echo mysql_error();
     $queryResult = mysql_fetch_array($resultSet);
+    //var_dump($queryResult);
     //echo mysql_error();
     
     $query['query'] = $queryResult[0];
     $query['database'] = $queryResult[1];
 
-    //$queryString =  $queryResult[0];
+    $queryString =  $queryResult[0];
     //var_dump($query);
     return $query;
 

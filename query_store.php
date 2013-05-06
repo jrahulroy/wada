@@ -6,7 +6,7 @@ include("dbconnect.php");
  * and open the template in the editor.
  */
 
-$conn=setconnection($_SESSION["servername"],$_SESSION["uname"],$_SESSION["pwd"],"ui-data");
+$conn=  defaultConnection();
 
 $query_string = $_POST['query_string'];
 //echo $query_string;

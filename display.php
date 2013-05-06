@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <html>
     <head>
         <title>Display a Query</title>
@@ -17,13 +20,15 @@
 
 
 <?php
-session_start();
+
 include('dbconnect.php');
 //echo '<p>Hello</p><br />';
-$conn = setconnection($_SESSION["servername"],$_SESSION["uname"],$_SESSION["pwd"],"ui-data");
-
+$conn = defaultConnection();
+if(!$conn){
+echo "Connection Failed";
+}
 $queryId = isset($_GET['query_id'])?$_GET['query_id']:1;
-
+//echo $queryId;
 $query = getQueryString($queryId, $conn);
 //echo $query_string . '<br />';
 $conn2=setconnection($_SESSION["servername"],$_SESSION["uname"],$_SESSION["pwd"],$_SESSION["database"]);

@@ -1,11 +1,13 @@
 <?php
+session_start();
+
 include('dbconnect.php');
 $queryId = isset($_GET['queryid'])?$_GET['queryid']:1;
 
 $uiConn = defaultConnection();
 $query = getQueryString($queryId, $uiConn);
 echo mysql_error();
-$dataConn = defaultConnection($query['database']);
+$dataConn = setconnection($_SESSION["servername"],$_SESSION["uname"],$_SESSION["pwd"],$_SESSION["database"], true);;
 
 $DB_Server = "localhost"; 
 $DB_Username = "root"; 
