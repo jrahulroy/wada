@@ -1,6 +1,0 @@
-
-Data Format Exhcnge IFRAME
-UI ENhancements
-	Footer, Header
-Query Generation
-Display Query
